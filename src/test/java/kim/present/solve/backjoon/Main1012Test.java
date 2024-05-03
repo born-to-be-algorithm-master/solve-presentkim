@@ -2,9 +2,9 @@ package kim.present.solve.backjoon;
 
 import org.junit.jupiter.api.Test;
 
-class Solution1012Test extends BaseTest {
+import static kim.present.solve.backjoon.BackjoonTester.test;
 
-    static Solution1012 solution = new Solution1012();
+class Main1012Test {
 
     @Test
     void testcase_1() {
@@ -32,7 +32,7 @@ class Solution1012Test extends BaseTest {
                         10 10 1
                         5 5""",
                 "5\n1",
-                solution
+                Main1012.class
         );
     }
 
@@ -49,7 +49,7 @@ class Solution1012Test extends BaseTest {
                         4 2
                         4 0""",
                 "2",
-                solution
+                Main1012.class
         );
     }
 }

@@ -6,10 +6,11 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-class BaseTest {
+public class BackjoonTester {
 
-    static void test(String input, String expected, ISolution solution) {
+    public static void test(String input, String expected, Class<?> solution) {
         InputStream in = System.in;
         PrintStream out = System.out;
         ByteArrayOutputStream actual = new ByteArrayOutputStream();
@@ -17,7 +18,12 @@ class BaseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         System.setOut(new PrintStream(actual));
 
-        solution.solve();
+        try {
+            solution.getDeclaredMethod("main", String[].class)
+                    .invoke(null, (Object) new String[]{});
+        } catch (Exception e) {
+            fail(e);
+        }
 
         System.setIn(in);
         System.setOut(out);
@@ -25,7 +31,7 @@ class BaseTest {
         assertEquals(filter(expected), filter(actual.toString()));
     }
 
-    static String filter(String input) {
+    private static String filter(String input) {
         return input.trim().replaceAll("\r", "");
     }
 }

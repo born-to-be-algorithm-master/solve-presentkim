@@ -7,8 +7,9 @@ import java.util.Scanner;
  * 백준 1012 - 유기농 배추
  * </a>
  */
-class Solution1012 implements ISolution {
-    public void solve() {
+public class Main1012 {
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         /* 테스트 케이스의 개수 */
@@ -44,7 +45,7 @@ class Solution1012 implements ISolution {
         }
     }
 
-    private void removeConnectedFarms(int[][] field, int x, int y) {
+    private static void removeConnectedFarms(int[][] field, int x, int y) {
         // 범위를 벗어나거나 배추가 없는 경우 패스
         if (x < 0 || x >= field.length || y < 0 || y >= field[0].length || field[x][y] == 0) {
             return;
@@ -59,4 +60,5 @@ class Solution1012 implements ISolution {
         removeConnectedFarms(field, x, y - 1);
         removeConnectedFarms(field, x, y + 1);
     }
+
 }
