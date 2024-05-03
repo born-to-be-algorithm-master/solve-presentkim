@@ -3,14 +3,12 @@ package kim.present.solve.programmers;
 import java.util.HashMap;
 import java.util.Map;
 
-import static kim.present.solve.Solver.assertion;
-
 /**
  * <a href="https://school.programmers.co.kr/learn/courses/30/lessons/258712?language=java">
  * 프러그래머스 258712 - 가장 많이 받은 선물
  * </a>
  */
-public class Solution258712 {
+class Solution258712 {
     public int solution(String[] friends, String[] gifts) {
         // friends 로 관계 데이터 생성
         Map<String, Integer> baseRelations = new HashMap<>();
@@ -43,7 +41,7 @@ public class Solution258712 {
         }
 
         // 다음달 선물 처리
-        int max = 0;
+        int answer = 0;
         for (int i = 0; i < friends.length; ++i) {
             Friend a = relations.get(friends[i]);
             for (int j = i + 1; j < friends.length; ++j) {
@@ -65,13 +63,13 @@ public class Solution258712 {
                     b.gift++;
                 }
 
-                if (max < a.gift || max < b.gift) {
-                    max = Math.max(a.gift, b.gift);
+                if (answer < a.gift || answer < b.gift) {
+                    answer = Math.max(a.gift, b.gift);
                 }
             }
         }
 
-        return max;
+        return answer;
     }
 
     private static class Friend {
@@ -79,22 +77,5 @@ public class Solution258712 {
         public int point;
         public int gift;
         public Map<String, Integer> relations;
-    }
-
-    public static void main(String[] args) {
-        Solution258712 solution = new Solution258712();
-
-        assertion(solution.solution(
-                new String[]{"muzi", "ryan", "frodo", "neo"},
-                new String[]{"muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi", "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi"}
-        ), 2);
-        assertion(solution.solution(
-                new String[]{"joy", "brad", "alessandro", "conan", "david"},
-                new String[]{"alessandro brad", "alessandro joy", "alessandro conan", "david alessandro", "alessandro david"}
-        ), 4);
-        assertion(solution.solution(
-                new String[]{"a", "b", "c"},
-                new String[]{"a b", "b a", "c a", "a c", "a c", "c a"}
-        ), 0);
     }
 }
