@@ -4,11 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * <a href="https://school.programmers.co.kr/learn/courses/30/lessons/258712?language=java">
- * 프러그래머스 258712 - 가장 많이 받은 선물
- * </a>
- */
 class Solution258712Test {
 
     static Solution258712 solution = new Solution258712();
