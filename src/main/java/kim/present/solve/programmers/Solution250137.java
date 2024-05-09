@@ -19,29 +19,19 @@ class Solution250137 {
      */
     public int solution(int[] bandage, int health, int[][] attacks) {
         final int t = bandage[0], x = bandage[1], y = bandage[2];
-        final int maxTime = attacks[attacks.length - 1][0];
-
-        int attackIndex = 0;
         int answer = health;
-        int success = 0;
-        for (int time = 1; time <= maxTime; ++time) {
-            if (attacks[attackIndex][0] == time) { // 현재 시간에 공격을 당할 경우
-                answer -= attacks[attackIndex][1];
-                success = 0;
-                if (answer < 1) return -1;
 
-                if (++attackIndex == attacks.length) return answer;
-            } else {
-                answer += x;
-                success++;
-                if (success == t) {
-                    success = 0;
-                    answer += y;
-                }
-
-                if (answer > health) answer = health;
+        int time = 0;
+        for (int[] attack : attacks) {
+            int diff = attack[0] - time;
+            answer = Math.min(answer + diff * x + diff / t * y, health) - attack[1];
+            if (answer <= 0) {
+                return -1;
             }
+
+            time += diff + 1;
         }
+
         return answer;
     }
 }

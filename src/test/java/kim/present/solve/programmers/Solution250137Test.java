@@ -39,4 +39,12 @@ class Solution250137Test {
         int[][] gifts = {{1, 2}, {3, 2}};
         assertEquals(3, solution.solution(bandage, health, gifts));
     }
+
+    @Test
+    void testcase_5() {
+        int[] bandage = {2, 4, 4};
+        int health = 100;
+        int[][] gifts = {{1, 96}, {18, 1}};
+        assertEquals(99, solution.solution(bandage, health, gifts));
+    }
 }
