@@ -26,16 +26,25 @@ class Main20529Test {
     void testcase_2() {
         test(
                 """
+                        2
+                        5
+                        INFP INFP INTP INTP ESTJ
+                        4
+                        ENTP ENTP INFP INTP""",
+                "2\n2",
+                Main20529.class
+        );
+    }
+
+    @Test
+    void testcase_3() {
+        test(
+                """
                         1
-                        5 3 6
-                        0 2
-                        1 2
-                        2 2
-                        3 2
-                        4 2
-                        4 0""",
+                        32
+                        ISTJ ISFJ INFJ INTJ ISTP ISFP INFP INTP ESTP ESFP ENFP ENTP ESTJ ESFJ ENFJ ENTJ ISTJ ISFJ INFJ INTJ ISTP ISFP INFP INTP ESTP ESFP ENFP ENTP ESTJ ESFJ ENFJ ENTJ""",
                 "2",
-                Main1012.class
+                Main20529.class
         );
     }
 }
