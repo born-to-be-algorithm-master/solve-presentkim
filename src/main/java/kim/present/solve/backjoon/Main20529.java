@@ -61,8 +61,8 @@ public class Main20529 {
      */
     private static byte mbtiToFlag(String mbti) {
         byte flag = 0;
-        for (int j = 0; j < 4; ++j) {
-            flag |= (byte) (mbti.charAt(j) == "ISTP".charAt(j) ? 1 << j : 0);
+        for (int i = 0; i < 4; ++i) {
+            flag += (byte) (mbti.charAt(i) == "ISTP".charAt(i) ? 1 << i : 0);
         }
         return flag;
     }
