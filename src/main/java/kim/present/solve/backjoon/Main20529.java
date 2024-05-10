@@ -76,20 +76,7 @@ public class Main20529 {
      * @return 세 개의 정수 간의 비트 차이의 합
      */
     private static int sumOfBitDiff(int a, int b, int c) {
-        // 세 개의 정수 간의 비트 차이의 합 초기화
-        int sum = 0;
-
-        // 각 비트별로 비교하여 다른 비트의 개수를 누적
-        for (int i = 0; i < 4; i++) {
-            int bitA = (a >> i) & 1; // 정수 a의 i번째 비트
-            int bitB = (b >> i) & 1; // 정수 b의 i번째 비트
-            int bitC = (c >> i) & 1; // 정수 c의 i번째 비트
-
-            // a, b, c 각각의 비트를 비교하여 다른 비트의 개수를 누적
-            sum += (bitA ^ bitB) + (bitA ^ bitC) + (bitB ^ bitC);
-        }
-
-        return sum;
+        return Integer.bitCount(a ^ b) + Integer.bitCount(a ^ c) + Integer.bitCount(b ^ c);
     }
 
     /**
