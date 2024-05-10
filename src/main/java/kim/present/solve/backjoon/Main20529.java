@@ -108,6 +108,10 @@ public class Main20529 {
                     if (min > distance) { // 최소값 갱신
                         min = distance;
                     }
+
+                    if (min == 0) { // 최소값이 0이면 더 이상 계산할 필요 없음
+                        return 0;
+                    }
                 }
             }
         }
