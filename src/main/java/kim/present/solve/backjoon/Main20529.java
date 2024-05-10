@@ -68,20 +68,28 @@ public class Main20529 {
     }
 
     /**
-     * 두 바이트의 비트 차이를 계산
+     * 세 개의 정수 간의 비트 차이의 합을 계산
      *
-     * @param a 비교할 바이트 a
-     * @param b 비교할 바이트 b
-     * @return 비트 차이
+     * @param a 정수 a
+     * @param b 정수 b
+     * @param c 정수 c
+     * @return 세 개의 정수 간의 비트 차이의 합
      */
-    private static int bitDiff(byte a, byte b) {
-        byte xor = (byte) (a ^ b);
-        int diff = 0;
-        while (xor != 0) {
-            diff += xor & 1;
-            xor >>= 1;
+    private static int sumOfBitDiff(int a, int b, int c) {
+        // 세 개의 정수 간의 비트 차이의 합 초기화
+        int sum = 0;
+
+        // 각 비트별로 비교하여 다른 비트의 개수를 누적
+        for (int i = 0; i < 4; i++) {
+            int bitA = (a >> i) & 1; // 정수 a의 i번째 비트
+            int bitB = (b >> i) & 1; // 정수 b의 i번째 비트
+            int bitC = (c >> i) & 1; // 정수 c의 i번째 비트
+
+            // a, b, c 각각의 비트를 비교하여 다른 비트의 개수를 누적
+            sum += (bitA ^ bitB) + (bitA ^ bitC) + (bitB ^ bitC);
         }
-        return diff;
+
+        return sum;
     }
 
     /**
@@ -96,7 +104,7 @@ public class Main20529 {
             for (int j = i + 1; j < length - 1; ++j) {
                 for (int k = j + 1; k < length; ++k) {
                     // MBTI 3개씩 묶어 가져와 비트 차이를 합산
-                    int distance = bitDiff(flags[i], flags[j]) + bitDiff(flags[j], flags[k]) + bitDiff(flags[k], flags[i]);
+                    int distance = sumOfBitDiff(flags[i], flags[j], flags[k]);
                     if (min > distance) { // 최소값 갱신
                         min = distance;
                     }
