@@ -77,8 +77,9 @@ public class Main20529 {
     private static int bitDiff(byte a, byte b) {
         byte xor = (byte) (a ^ b);
         int diff = 0;
-        for (int i = 0; i < 8; ++i) {
-            diff += (xor >> i) & 1;
+        while (xor != 0) {
+            diff += xor & 1;
+            xor >>= 1;
         }
         return diff;
     }
