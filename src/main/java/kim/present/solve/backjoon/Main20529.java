@@ -87,8 +87,8 @@ public class Main20529 {
     private static int calcMinDistance(byte[] flags) {
         int length = flags.length; // MBTI 플래그 배열의 길이
         int min = 8; // 최대 값인 8로 초기화
-        for (int i = 0; i < length - 2; ++i) {
-            for (int j = i + 1; j < length - 1; ++j) {
+        for (int i = 0; i < length; ++i) {
+            for (int j = i + 1; j < length; ++j) {
                 for (int k = j + 1; k < length; ++k) {
                     // MBTI 3개씩 묶어 가져와 비트 차이를 합산
                     int distance = sumOfBitDiff(flags[i], flags[j], flags[k]);
