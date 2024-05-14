@@ -15,6 +15,10 @@ class Solution120840 {
      * HINT : 서로 다른 n개 중 m개를 뽑는 경우의 수 공식은 다음과 같습니다. n! / (m! * (n-m)!)
      */
     public int solution(int balls, int share) {
+        if (balls == share) {
+            return 1;
+        }
+
         BigInteger n = BigInteger.valueOf(balls);
         BigInteger m = BigInteger.valueOf(share);
         return factorial(n).divide(factorial(m).multiply(factorial(n.subtract(m)))).intValue();

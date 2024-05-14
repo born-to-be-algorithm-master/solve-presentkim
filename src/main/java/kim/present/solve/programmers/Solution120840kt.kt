@@ -13,6 +13,10 @@ class Solution120840kt {
      * HINT : 서로 다른 n개 중 m개를 뽑는 경우의 수 공식은 다음과 같습니다. n! / (m! * (n-m)!)
      */
     fun solution(balls: Int, share: Int): Int {
+        if (balls == share) {
+            return 1
+        }
+
         val n = balls.toBigInteger()
         val m = share.toBigInteger()
         return (factorial(n) / (factorial(m) * factorial(n - m))).toInt()
