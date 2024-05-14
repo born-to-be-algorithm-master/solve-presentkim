@@ -36,6 +36,14 @@ class Solution120840Test {
     @Test
     void testcase_4() {
         int balls = 30;
+        int share = 29;
+        assertEquals(30, javaSolution.solution(balls, share));
+        assertEquals(30, kotlinSolution.solution(balls, share));
+    }
+
+    @Test
+    void testcase_5() {
+        int balls = 30;
         int share = 30;
         assertEquals(1, javaSolution.solution(balls, share));
         assertEquals(1, kotlinSolution.solution(balls, share));

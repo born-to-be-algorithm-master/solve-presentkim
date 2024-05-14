@@ -1,7 +1,5 @@
 package kim.present.solve.programmers;
 
-import java.math.BigInteger;
-
 /**
  * <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120840?language=java">
  * 프로그래머스 120840 - 구슬을 나누는 경우의 수
@@ -12,29 +10,32 @@ class Solution120840 {
      * @param balls 1 ≤ balls ≤ 30
      * @param share 1 ≤ balls ≤ share ≤ 30
      * @return balls 개의 구슬 중 share 개의 구슬을 고르는 가능한 모든 경우의 수
-     * HINT : 서로 다른 n개 중 m개를 뽑는 경우의 수 공식은 다음과 같습니다. n! / (m! * (n-m)!)
      */
     public int solution(int balls, int share) {
-        if (balls == share) {
-            return 1;
-        }
-
-        BigInteger n = BigInteger.valueOf(balls);
-        BigInteger m = BigInteger.valueOf(share);
-        return factorial(n).divide(factorial(m).multiply(factorial(n.subtract(m)))).intValue();
+        // nCr = nC(n - r) 이므로, share > balls - share 일 때, nCr = nC(balls - share) 로 계산하면 더 빠름
+        return (int) nCr(balls, Math.min(share, balls - share));
     }
 
     /**
-     * n! 을 구하는 메소드
+     * nCr (조합) : 서로 다른 n개 중 순서를 생각하지 않고 r개를 뽑는 경우의 수
      *
-     * @param bi 1 ≤ n ≤ 30
-     * @return n!
+     * @param n 서로 다른 n개
+     * @param r 순서를 생각하지 않고 r개를 뽑는 경우
+     * @return 서로 다른 n개 중 순서를 생각하지 않고 r개를 뽑는 경우의 수
      */
-    private BigInteger factorial(BigInteger bi) {
-        if (bi.equals(BigInteger.ONE)) {
-            return bi;
+    private long nCr(int n, int r) {
+        /*
+         * nPr (순열) : 서로 다른 n개 중 r개를 뽑는 경우의 수
+         * nCr (조합) : 서로 다른 n개 중 순서를 생각하지 않고 r개를 뽑는 경우의 수
+         * nCr  = nPr / r! (순열 / 뽑은 r개의 항목을 나열하는 방법의 수)
+         *      = (n! / (n - r)!) / r!
+         *      = n! / (r! * (n - r))!
+         */
+        long result = 1;
+        for (int i = 0; i < r; ++i) {
+            result *= n - i;
+            result /= i + 1;
         }
-
-        return bi.multiply(factorial(bi.subtract(BigInteger.ONE)));
+        return result;
     }
 }
