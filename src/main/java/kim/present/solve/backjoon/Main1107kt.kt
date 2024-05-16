@@ -16,23 +16,20 @@ object Main1107kt {
         val buttons = BooleanArray(10)
         readlnOrNull()?.split(" ")?.forEach { buttons[it.toInt()] = true }
 
-        // 최소 입력 횟수 출력
-        println(getMinButtonCount(n, buttons))
-    }
-
-    private fun getMinButtonCount(targetChannel: Int, buttons: BooleanArray): Int {
-        var result = abs(100 - targetChannel) // 초기값 : 초기 채널(100)에서 +, - 버튼만으로 이동하는 횟수 (0 ~ 499,900)
+        var answer = abs(100 - n) // 초기값 : 초기 채널(100)에서 +, - 버튼만으로 이동하는 횟수 (0 ~ 499,900)
         var current = nextButton(0, buttons) // 현재 채널 초기값 : 고장나지 않은 첫번째 버튼
-        val limit = targetChannel + result // 최대 채널 : 이동하려는 채널(n) + 초기 채널과 이동하려는 채널(n)의 차이 (100 ~ 999,900)
+        val limit = n + answer // 최대 채널 : 이동하려는 채널(n) + 초기 채널과 이동하려는 채널(n)의 차이 (100 ~ 999,900)
         while (current < limit) {
             val digitCount = if (current == 0) 1 else (log10(current.toDouble()) + 1).toInt() // 번호 입력 수
-            val absoluteDiff = abs(current - targetChannel) // 채널 이동 수
+            val absoluteDiff = abs(current - n) // 채널 이동 수
 
-            result = minOf(result, digitCount + absoluteDiff) // 최소값 갱신
+            answer = minOf(answer, digitCount + absoluteDiff) // 최소값 갱신
 
             current = nextChannel(current, buttons) // 다음 채널로 이동
         }
-        return result
+
+        // 최소 입력 횟수 출력
+        println(answer)
     }
 
     /**
