@@ -26,6 +26,8 @@ open class TestBase {
                     try {
                         solution.getDeclaredMethod("main", Array<String>::class.java)
                             .invoke(null, arrayOf<String>() as Any)
+                    } catch (e: NoSuchMethodException) {
+                        solution.getDeclaredMethod("main").invoke(null)
                     } catch (e: Exception) {
                         Assertions.fail<Any>(e)
                     }
