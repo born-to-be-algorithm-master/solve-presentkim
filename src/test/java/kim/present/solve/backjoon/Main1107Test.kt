@@ -121,5 +121,13 @@ internal class Main1107Test : TestBase() {
         """ expected !"""
             226
         """
+
+        !"""
+            1
+            10
+            0 1 2 3 4 5 6 7 8 9
+        """ expected !"""
+            99
+        """
     }
 }
