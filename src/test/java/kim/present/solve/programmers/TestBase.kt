@@ -16,16 +16,30 @@ abstract class TestBase<S : KFunction<R>, ARGS, R> {
 
     fun test(appendTestcases: MutableList<TestCase<() -> ARGS, R>>.() -> Unit) =
         testcases.apply(appendTestcases).map { (parameters, expected) ->
-            DynamicTest.dynamicTest("parameters: ${parameters()}") {
+            DynamicTest.dynamicTest("parameters: ${convertToString(parameters())}") {
                 try {
                     solutions.forEach { solution ->
-                        assertEquals(expected, solution solve parameters(), "parameters: ${parameters()}")
+                        assertEquals(expected, solution solve parameters())
                     }
                 } catch (e: Exception) {
-                    fail<Any>("parameters: ${parameters()}", e)
+                    fail(e)
                 }
             }
         }.also { testcases = mutableListOf() }
+
+    private fun <T> convertToString(v: T): String = when (v) {
+        is Short -> "${v}S"
+        is Long -> "${v}L"
+        is Double -> "%.6fd".format(v)
+        is Float -> "%.6ff".format(v)
+        is Char -> "'$v'"
+        is String -> "\"$v\""
+        is IntArray -> v.contentToString()
+        is Array<*> -> "[${v.joinToString(", ") { convertToString(it!!) }}]"
+        is Pair<*, *> -> "${convertToString(v.first)}, ${convertToString(v.second)}"
+        is Triple<*, *, *> -> "${convertToString(v.first)}, ${convertToString(v.second)}, ${convertToString(v.third)}"
+        else -> v.toString()
+    }
 
     abstract infix fun S.solve(arg: ARGS): R
 
@@ -61,10 +75,13 @@ open class TestBase3<P1, P2, P3, R> : TestBase<KFunction3<P1, P2, P3, R>, Triple
 
     @JvmName("argsP1")
     infix fun P1.args(p2: P2) = Pair(this, p2)
+
     @JvmName("argsP2")
     infix fun P2.args(p3: P3) = Pair(this, p3)
+
     @JvmName("argsP1ToTriple")
     infix fun P1.args(p: Pair<P2, P3>) = Triple(this, p.first, p.second)
+
     @JvmName("argsP1P2ToTriple")
     infix fun Pair<P1, P2>.args(p3: P3) = Triple(this.first, this.second, p3)
 

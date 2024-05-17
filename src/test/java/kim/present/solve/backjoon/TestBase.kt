@@ -29,7 +29,7 @@ open class TestBase {
                     } catch (e: NoSuchMethodException) {
                         solution.getDeclaredMethod("main").invoke(null)
                     } catch (e: Exception) {
-                        Assertions.fail<Any>(e)
+                        Assertions.fail(e)
                     }
 
                     System.setIn(`in`)
