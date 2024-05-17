@@ -19,7 +19,11 @@ abstract class TestBase<S : KFunction<R>, ARGS, R> {
             DynamicTest.dynamicTest("parameters: ${convertToString(parameters())}") {
                 try {
                     solutions.forEach { solution ->
-                        assertEquals(expected, solution solve parameters())
+                        if (expected is Iterable<*> || expected is Array<*> || expected is IntArray) {
+                            assertEquals(convertToString(expected), convertToString(solution solve parameters()))
+                        } else {
+                            assertEquals(expected, solution solve parameters())
+                        }
                     }
                 } catch (e: Exception) {
                     fail(e)
