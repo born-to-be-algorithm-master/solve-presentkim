@@ -17,7 +17,7 @@ class Solution250136kt {
             val (x, y) = queue.removeLast()
 
             // 땅의 범위를 벗어나거나 빈 땅인 경우 패스
-            if (x < 0 || x >= land[0].size || y < 0 || y >= land.size || land[y][x] == 0) {
+            if (y !in land.indices || x !in land[0].indices || land[y][x] == 0) {
                 continue
             }
 

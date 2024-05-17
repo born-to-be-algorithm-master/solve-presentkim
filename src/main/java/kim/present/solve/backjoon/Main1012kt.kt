@@ -60,7 +60,7 @@ object Main1012kt {
      */
     private fun removeConnectedFarms(farms: Array<BooleanArray>, x: Int, y: Int) {
         // 범위를 벗어나거나 배추가 없는 경우 패스
-        if (x < 0 || x >= farms.size || y < 0 || y >= farms[0].size || !farms[x][y]) {
+        if (x !in farms.indices || y !in farms[0].indices || !farms[x][y]) {
             return
         }
 
